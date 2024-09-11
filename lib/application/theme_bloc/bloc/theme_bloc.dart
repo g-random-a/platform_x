@@ -55,7 +55,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
               theme ? Brightness.dark : Brightness.light,
         ));
       } catch (error) {
-        // rethrow;
+        // rethrow error;
       }
     });
   }
