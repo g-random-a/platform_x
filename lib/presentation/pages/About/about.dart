@@ -1,3 +1,5 @@
+import 'package:flutter_svg/svg.dart';
+
 import 'about_imports.dart';
 
 class About extends StatelessWidget {
@@ -21,11 +23,24 @@ class About extends StatelessWidget {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image(
-                        image:  AssetImage(AssetFiles.AILogo),
-                        width: screenWidth * 0.5,
-                        height: screenHeight * 0.2,
-                      ),
+                      // get theme state
+                      context.read<ThemeBloc>().state is LightThemeState
+                                  ? SvgPicture.asset(
+                                      AssetFiles.platformX_black,
+                                      width: MediaQuery.of(context).size.width*.01,
+                                height:
+                                    MediaQuery.of(context).size.height *
+                                        .1,
+                                    )
+                                  :
+                                SvgPicture.asset(
+                                AssetFiles.platformX,
+                                width: MediaQuery.of(context).size.width *
+                                    .6,
+                                height:
+                                    MediaQuery.of(context).size.height *
+                                        .15,
+                              ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Column(
@@ -37,20 +52,18 @@ class About extends StatelessWidget {
                                 fontSize: screenWidth * 0.06,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: 'Lexend',
-                                // color: const Color.fromRGBO(1, 155, 113, 1.0),
                                 color: kPrimaryColor,
                               ),
                             ),
                             SizedBox(height: screenHeight * 0.02),
                             Text(
-                              "Detect coffee leaf diseases with ease using our powerful image segmentation technology.",
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
                                 fontSize: screenWidth * 0.04,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: 'Lexend',
-                                // color: const Color.fromRGBO(1, 155, 113, 1.0),
                                 color: BlocProvider.of<ThemeBloc>(context)
                                     .state
                                     .blackColor,
@@ -58,14 +71,13 @@ class About extends StatelessWidget {
                             ),
                             SizedBox(height: screenHeight * 0.01),
                             Text(
-                              "Our mobile application is designed to help coffee farmers and enthusiasts identify and mitigate diseases that can affect coffee plants",
+                              "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                               textAlign: TextAlign.center,
                               maxLines: 4,
                               style: TextStyle(
                                 fontSize: screenWidth * 0.04,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: 'Lexend',
-                                // color: const Color.fromRGBO(1, 155, 113, 1.0),
                                 color: BlocProvider.of<ThemeBloc>(context)
                                     .state
                                     .blackColor,
@@ -73,14 +85,13 @@ class About extends StatelessWidget {
                             ),
                             SizedBox(height: screenHeight * 0.01),
                             Text(
-                              "Our mobile application is designed to help coffee farmers and enthusiasts identify and mitigate diseases that can affect coffee plants",
+                              "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
                               textAlign: TextAlign.center,
                               maxLines: 4,
                               style: TextStyle(
                                 fontSize: screenWidth * 0.04,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: 'Lexend',
-                                // color: const Color.fromRGBO(1, 155, 113, 1.0),
                                 color: BlocProvider.of<ThemeBloc>(context)
                                     .state
                                     .blackColor,
@@ -88,14 +99,13 @@ class About extends StatelessWidget {
                             ),
                             SizedBox(height: screenHeight * 0.01),
                             Text(
-                              "Our mobile application is designed to help coffee farmers and enthusiasts identify and mitigate diseases that can affect coffee plants",
+                              "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
                               textAlign: TextAlign.center,
                               maxLines: 4,
                               style: TextStyle(
                                 fontSize: screenWidth * 0.04,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: 'Lexend',
-                                // color: const Color.fromRGBO(1, 155, 113, 1.0),
                                 color: BlocProvider.of<ThemeBloc>(context)
                                     .state
                                     .blackColor,
