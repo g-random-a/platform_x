@@ -17,7 +17,8 @@ class RegisterationBloc extends Bloc<RegisterEvents, RegisterStates> {
     emit(RegisterLoadingState());
     try {
       bool registered = await authRepo.register(
-          event.fullname, event.username, event.password);
+          event.firstName, event.lastName, event.email, event.username, event.gender, event.age, event.password
+      );
       if (!registered) throw Exception("Failed to register");
       emit(RegisterSuccessState());
     } on Exception {
