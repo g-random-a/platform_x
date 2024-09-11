@@ -23,10 +23,12 @@ class AuthRepo {
   }
 
   Future<bool> register(
-      String fullname, String username, String password) async {
+      String firstname, String lastname, String email, String username, String gender, int age, String password) async {
     try {
       bool token =
-          await authDataProvider.register(fullname, username, password);
+          await authDataProvider.register(
+              firstname, lastname, email, username, gender, age, password
+          );
       return token;
     } catch (e) {
       rethrow;

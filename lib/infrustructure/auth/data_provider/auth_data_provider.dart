@@ -13,6 +13,8 @@ class AuthDataProvider extends DataProvider {
     required String name,
     required String email,
     required String password,
+    String gender = "",
+    int age = 0,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
@@ -20,6 +22,8 @@ class AuthDataProvider extends DataProvider {
     await prefs.setString('email', email);
     await prefs.setString(
         'password', BCrypt.hashpw(password, BCrypt.gensalt()));
+    await prefs.setString("gender", gender);
+    await prefs.setInt("age", age);
   }
 
   Future<String> testLogin() async {
@@ -36,63 +40,40 @@ class AuthDataProvider extends DataProvider {
       dio.options.headers = {};
       dio.options.headers['content-Type'] = 'application/json';
       final response =
-          await dio.post('$baseUrl/session/login/', data: <String, String>{
-        'username': username,
+          await dio.post('$baseUrl/auth/login/', data: <String, String>{
+        'email': username,
         'password': password,
       });
       if (response.statusCode != 200) {
         throw (Exception('Failed to login'));
       }
 
-      final responseHeader = response.headers;
+      print("@response == ${response}");
 
-      for (var element in responseHeader['set-cookie']!) {
-        if (element.contains("session")) {
-          for (var subElement in element.split(';')) {
-            if (subElement.contains("session")) {
-              var session = subElement.split("=")[1];
-              var token = session;
+      var token = response.data['token'];
 
-              dio.options.headers['content-Type'] = 'application/json';
-              // dio.options.headers['Authorization'] = 'Bearer $token';
-              dio.options.headers["cookie"] = 'session=$token';
+      dio.options.headers['Authorization'] = 'Bearer $token';
 
-              Response getUser = await dio.get(
-                '$baseUrl/account/',
-              );
-              if (getUser.statusCode != 200) {
-                throw (Exception('Failed to login'));
-              }
-              var name = getUser.data["result"]['name'];
+      Response getUser = await dio.get(
+        '$baseUrl/auth/get-profile',
+      );
 
-              await saveDataLocally(
-                  token: token,
-                  email: username,
-                  password: password,
-                  name: name);
-              return token;
-            } else {
-              throw Exception("no access token");
-            }
-          }
-        } else {
-          throw Exception("No Access Token 2");
-        }
+      if (getUser.statusCode != 200) {
+        throw (Exception('Failed to login'));
       }
-      // var token = response.data['access'];
-      // dio.options.headers['content-Type'] = 'application/json';
-      // dio.options.headers['Authorization'] = 'Bearer $token';
-      // Response getUser = await dio.get(
-      //   '$baseUrl/account/',
-      // );
-      // if (getUser.statusCode != 200) {
-      //   throw (Exception('Failed to login'));
-      // }
-      // var name = getUser.data['name'];
-      // await saveDataLocally(
-      //     token: token, email: username, password: password, name: name);
-      // return token;
-      throw Exception("No Access Token 1");
+
+      await saveDataLocally(
+          token: token,
+          email: username,
+          password: password,
+          name: getUser.data['userInfo']['firstName'] +
+              " " +
+              getUser.data['userInfo']['lastName'],
+          gender: getUser.data['relatedObject']['gender'],
+          age: getUser.data['relatedObject']['age'],
+          );
+      return token;
+
     } catch (e) {
       print({"error": e});
       rethrow;
@@ -100,15 +81,20 @@ class AuthDataProvider extends DataProvider {
   }
 
   Future<bool> register(
-      String fullname, String username, String password) async {
+      String firstname, String lastname, String email, String username, String gender, int age, String password) async {
     try {
       dio.options.headers = {};
       dio.options.headers['content-Type'] = 'application/json';
-      final response = await dio.post('$baseUrl/account/add-new/',
+      final response = await dio.post('$baseUrl/auth/signup/agent',
           data: <String, String>{
-            'fullname': fullname,
-            'email': username,
-            'password': password
+            "userName": username,
+            "email": email, 
+            "password": password,
+            "firstName": firstname,
+            "lastName": lastname,
+            "userType": "Agent",
+            "gender": gender,
+            "age": age.toString()
           });
       if (response.statusCode != 200) {
         throw (Exception('Failed to register'));
