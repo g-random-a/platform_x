@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:platform_x/presentation/constants.dart';
 
 import '../../../infrustructure/auth/repository/auth_repo_imports.dart';
@@ -32,27 +33,41 @@ class MobileWelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        // const WelcomeImage(),
-        SizedBox(
-            height: MediaQuery.of(context).size.height / 1.8,
-            child: Image.asset(
-              AssetFiles.WellcomeImage,
-              fit: BoxFit.fitHeight,
-            )),
-        const Row(
-          children: [
-            Spacer(),
-            Expanded(
-              flex: 8,
-              child: LoginAndSignupBtn(),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, theme) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            // const WelcomeImage(),
+            SizedBox(
+                height: MediaQuery.of(context).size.height / 1.8,
+                child: theme is LightThemeState
+                                  ? SvgPicture.asset(
+                                      AssetFiles.platformX_black,
+                                      
+                                    )
+                                  :
+                                SvgPicture.asset(
+                                AssetFiles.platformX,
+                                width: MediaQuery.of(context).size.width *
+                                    .6,
+                                height:
+                                    MediaQuery.of(context).size.height *
+                                        .15,
+                              ),),
+            const Row(
+              children: [
+                Spacer(),
+                Expanded(
+                  flex: 8,
+                  child: LoginAndSignupBtn(),
+                ),
+                Spacer(),
+              ],
             ),
-            Spacer(),
           ],
-        ),
-      ],
+        );
+      }
     );
   }
 }
