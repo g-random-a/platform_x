@@ -32,4 +32,13 @@ class TasksRepository {
       rethrow;
     }
   }
+
+  Future<List<List<Task>>> loadTasksHistory() async {
+    try {
+      List<List<Task>> tasks = await tasksDataProvider.loadTasksHistory();
+      return tasks;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

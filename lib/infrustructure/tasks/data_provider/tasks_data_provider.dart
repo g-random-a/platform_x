@@ -32,38 +32,48 @@ class TasksDataProvider extends DataProvider {
   }
 
   Future<List<Task>> loadTasks() async {
-    // try {
-    //   SharedPreferences prefs = await SharedPreferences.getInstance();
-    //   String? token = prefs.getString('token');
-    //   if (token == null) {
-    //     throw Exception("notLogged In");
-    //   }
-    //   dio.options.headers['content-Type'] = 'application/json';
-    //   dio.options.headers['cookie'] = 'session=$token';
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('token');
+      if (token == null) {
+        throw Exception("notLogged In");
+      }
+      dio.options.headers['content-Type'] = 'application/json';
+      dio.options.headers['cookie'] = 'session=$token';
+      dio.options.headers['Authorization'] = 'Bearer $token';
 
-    //   Response response = await dio.get("$baseUrl/load_tasks/");
+      Response response = await dio.get("$baseUrl/agent/get-forms");
 
-    //   if (response.statusCode == 200) {
-    //     List<Task> tasks = (response.data as List).map((e) => Task.fromJson(e)).toList();
-    //     return tasks;
-    //   } else {
-    //     throw Exception("Error while loading tasks.");
-    //   }
-    // } catch (e) {
-    //   rethrow;
-    // }
+      print("-----------------");
+      print("@response == ${response}");
 
-    await Future.delayed(const Duration(milliseconds: 2000));
-    return 
-      [
-        new Task(taskId: "taskId", taskName: "start of tasks", taskDescription: "taskDescription", numberOfQuestion: 255, bonus: 25),
-        new Task(taskId: "taskId", taskName: "taskName", taskDescription: "taskDescription", numberOfQuestion: 255, bonus: 25),
-        new Task(taskId: "taskId", taskName: "taskName", taskDescription: "taskDescription", numberOfQuestion: 255, bonus: 25),
-        new Task(taskId: "taskId", taskName: "taskName", taskDescription: "taskDescription", numberOfQuestion: 255, bonus: 25),
-        new Task(taskId: "taskId", taskName: "taskName", taskDescription: "taskDescription", numberOfQuestion: 255, bonus: 25),
-        new Task(taskId: "taskId", taskName: "taskName", taskDescription: "taskDescription", numberOfQuestion: 255, bonus: 25),
-        new Task(taskId: "taskId", taskName: "end of tasks", taskDescription: "taskDescription", numberOfQuestion: 255, bonus: 25),
-      ];
+      if (response.statusCode != 200) {
+        throw Exception("Error while loading tasks.");
+      }
+
+
+      List<Task> tasks = [];
+
+      List forms = response.data['forms'];
+      
+      for (var form in forms) {
+        Task task = Task(
+          taskId: form['id'].toString(),
+          taskName: form['formName'],
+          taskDescription: form['formDescription'],
+          numberOfQuestion: form['numberOfQuestion'],
+          bonus: 0,
+        );
+        
+        tasks.add(task);
+      }
+      
+      return tasks;
+
+    } catch (e) {
+      rethrow;
+    }
+
   }
 
   Future<List<Task>> loadMoreTasks(int nextPage) async {
@@ -96,6 +106,58 @@ class TasksDataProvider extends DataProvider {
         new Task(taskId: "taskId", taskName: "taskName", taskDescription: "taskDescription", numberOfQuestion: 255, bonus: 25),
         new Task(taskId: "taskId", taskName: "done", taskDescription: "taskDescription", numberOfQuestion: 255, bonus: 25),
       ];
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<List<Task>>> loadTasksHistory() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('token');
+      if (token == null) {
+        throw Exception("notLogged In");
+      }
+      dio.options.headers['content-Type'] = 'application/json';
+      dio.options.headers['cookie'] = 'session=$token';
+
+      Response response = await dio.get("$baseUrl/agent/get-task-history");
+
+      if (response.statusCode == 200) {
+        List<Task> completedTasks = [];
+        List<Task> pendingTasks = [];
+
+        List tasks = response.data['acceptedTasks'];
+        for (var task in tasks) {
+          Task newTask = Task(
+            taskId: task['form']['id'].toString(),
+            taskName: task['form']['formName'],
+            taskDescription: task['form']['formDescription'],
+            numberOfQuestion: 0,
+            bonus: 0,
+          );
+
+          completedTasks.add(newTask);
+        }
+        List tasksPending = response.data['acceptedTasks'];
+        for (var task in tasksPending) {
+          Task newTask = Task(
+            taskId: task['form']['id'].toString(),
+            taskName: task['form']['formName'],
+            taskDescription: task['form']['formDescription'],
+            numberOfQuestion: 0,
+            bonus: 0,
+            date: task['updatedAt'] != null ? DateTime.parse(task['updatedAt']) : null,
+          );
+        
+            pendingTasks.add(newTask);
+          }
+
+        return [completedTasks, pendingTasks];
+        
+      } else {
+        throw Exception("Error while loading tasks history.");
+      }
     } catch (e) {
       rethrow;
     }

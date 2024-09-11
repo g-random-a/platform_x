@@ -6,7 +6,8 @@ class Task {
   String taskDescription;
   int numberOfQuestion;
   int bonus;
-  List<Question> questions = [];
+  DateTime? date;
+  List<Question>? questions = [];
 
   static final List<String> hospitalFields = [
     'taskId',
@@ -22,6 +23,8 @@ class Task {
     required this.taskDescription,
     required this.numberOfQuestion,
     required this.bonus,
+    this.date,
+    this.questions,
   });
 
   factory Task.fromJson(Map<String, dynamic> json) {
