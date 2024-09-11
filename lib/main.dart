@@ -7,9 +7,13 @@ import 'package:platform_x/infrustructure/tasks/data_provider/tasks_data_provide
 import 'application/tasks_bloc/bloc/tasks_bloc.dart';
 import 'infrustructure/tasks/repository/tasks_repo.dart';
 import 'lib.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Permission.microphone.request();
 
   SystemChrome.setPreferredOrientations([ 
     DeviceOrientation.portraitUp,
@@ -26,6 +30,8 @@ void main() async {
   bool isLoggedIn = token != null;
 
   final Dio dio = Dio();
+  // set timeout for dio
+  dio.options.connectTimeout = Duration(seconds: 10); //5s
 
   await dotenv.load();
 
