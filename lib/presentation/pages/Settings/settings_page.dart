@@ -81,24 +81,24 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                         ],
                       ),
-                      InkWell(
-                        onTap: () {
-                          BlocProvider.of<ThemeBloc>(context)
-                              .add(const ChangeThemeEvent());
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: BlocProvider.of<ThemeBloc>(context).state
-                                  is DarkThemeState
-                              ? const Icon(Icons.light_mode,
-                                  color: kPrimaryColor, size: 40)
-                              : Icon(Icons.dark_mode,
-                                  color: BlocProvider.of<ThemeBloc>(context)
-                                      .state
-                                      .blackColor,
-                                  size: 40),
-                        ),
-                      )
+                      // InkWell(
+                      //   onTap: () {
+                      //     BlocProvider.of<ThemeBloc>(context)
+                      //         .add(const ChangeThemeEvent());
+                      //   },
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: BlocProvider.of<ThemeBloc>(context).state
+                      //             is DarkThemeState
+                      //         ? const Icon(Icons.light_mode,
+                      //             color: kPrimaryColor, size: 40)
+                      //         : Icon(Icons.dark_mode,
+                      //             color: BlocProvider.of<ThemeBloc>(context)
+                      //                 .state
+                      //                 .blackColor,
+                      //             size: 40),
+                      //   ),
+                      // )
                     ],
                   ),
                   const SizedBox(

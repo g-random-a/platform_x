@@ -1,3 +1,4 @@
+import '../stat/stat_screen.dart';
 import 'main_screen_imports.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -14,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
     HomePage(),
     // SyncDataPage(),
     BookmarkPage(),
-    SettingsPage(),
+    StatPage(),
     SettingsPage(),
 
   ];
@@ -86,9 +87,9 @@ class _MainScreenState extends State<MainScreen> {
                             icon: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Iconsax.home,
+                                Icon(currentTab == 1 ? Iconsax.home1 : Iconsax.home,
                                     color: currentTab == 1
-                                        ? kSecondaryColor
+                                        ? kPrimaryColor
                                         : BlocProvider.of<ThemeBloc>(
                                                 context)
                                             .state
@@ -123,9 +124,9 @@ class _MainScreenState extends State<MainScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
-                                  Iconsax.heart,
+                                  currentTab == 2 ? Iconsax.heart5 : Iconsax.heart,
                                   color: currentTab == 2
-                                      ? kSecondaryColor
+                                      ? kPrimaryColor
                                       : BlocProvider.of<ThemeBloc>(context)
                                           .state
                                           .blackColor,
@@ -161,9 +162,9 @@ class _MainScreenState extends State<MainScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
-                                  Iconsax.task,
+                                  currentTab == 3 ? Iconsax.task_square5 : Iconsax.task_square,
                                   color: currentTab == 3
-                                      ? kSecondaryColor
+                                      ? kPrimaryColor
                                       : BlocProvider.of<ThemeBloc>(context)
                                           .state
                                           .blackColor,
@@ -195,9 +196,9 @@ class _MainScreenState extends State<MainScreen> {
                             icon: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Iconsax.user,
+                                Icon( currentTab == 4 ? Iconsax.profile_2user5 : Iconsax.profile_2user,
                                     color: currentTab == 4
-                                        ? kSecondaryColor
+                                        ? kPrimaryColor
                                         : BlocProvider.of<ThemeBloc>(
                                                 context)
                                             .state
