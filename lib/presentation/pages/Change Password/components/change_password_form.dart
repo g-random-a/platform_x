@@ -48,13 +48,14 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                       : "old password is required.";
                 },
                 decoration: InputDecoration(
+                  filled: false,
                   hintText: "enter old password",
                   prefixIcon: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                     child: Icon(Icons.lock),
                   ),
                   suffixIcon: Padding(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     child: IconButton(
                         onPressed: () {
                           setState(() {
@@ -66,6 +67,22 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                             // ignore: dead_code
                             : const Icon(Icons.visibility_off)),
                   ),
+                  enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: kPrimaryColor)),
+                            focusedErrorBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(239, 188, 8, 0.6)),
+                              // Color of the border when focused
+                            ),
+                            errorBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: kPrimaryColor)),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1.5,
+                                  color: kPrimaryColor),
+                            ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -78,13 +95,14 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                   return Validators().isPasswordValid(psd);
                 },
                 decoration: InputDecoration(
+                  filled: false,
                   hintText: "enter your password",
                   prefixIcon: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                     child: Icon(Icons.lock),
                   ),
                   suffixIcon: Padding(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     child: IconButton(
                         onPressed: () {
                           setState(() {
@@ -96,6 +114,22 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                             // ignore: dead_code
                             : const Icon(Icons.visibility_off)),
                   ),
+                  enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: kPrimaryColor)),
+                            focusedErrorBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(239, 188, 8, 0.6)),
+                              // Color of the border when focused
+                            ),
+                            errorBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: kPrimaryColor)),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1.5,
+                                  color: kPrimaryColor),
+                            ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -112,13 +146,14 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                 },
                 obscureText: showConfirmPass,
                 decoration: InputDecoration(
+                  filled: false,
                   hintText: "confirm your password",
                   prefixIcon: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                     child: Icon(Icons.lock),
                   ),
                   suffixIcon: Padding(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     child: IconButton(
                         onPressed: () {
                           setState(() {
@@ -129,6 +164,22 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                             ? const Icon(Icons.visibility)
                             : const Icon(Icons.visibility_off)),
                   ),
+                  enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: kPrimaryColor)),
+                            focusedErrorBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(239, 188, 8, 0.6)),
+                              // Color of the border when focused
+                            ),
+                            errorBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: kPrimaryColor)),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1.5,
+                                  color: kPrimaryColor),
+                            ),
                 ),
               ),
               const SizedBox(height: 20),

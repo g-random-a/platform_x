@@ -13,7 +13,7 @@ class ResetPasswordScreenTopImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Column(
         children: [
           // SizedBox(height: defaultPadding * 2),
@@ -22,9 +22,24 @@ class ResetPasswordScreenTopImage extends StatelessWidget {
               const Spacer(),
               Expanded(
                 flex: 8,
-                child: Image.asset(AssetFiles.CoffeenetLogo,
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 5),
+                child: theme is LightThemeState
+                                  ? SvgPicture.asset(
+                                      AssetFiles.platformX_black,
+                                      width: MediaQuery.of(context).size.width *
+                                    .6,
+                                height:
+                                    MediaQuery.of(context).size.height *
+                                        .15,
+                                    )
+                                  :
+                                SvgPicture.asset(
+                                AssetFiles.platformX,
+                                width: MediaQuery.of(context).size.width *
+                                    .6,
+                                height:
+                                    MediaQuery.of(context).size.height *
+                                        .15,
+                              ),
               ),
               const Spacer(),
             ],
