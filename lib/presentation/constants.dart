@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const kSecondaryColor = Color.fromARGB(255, 173, 8, 239);
-const kPrimaryColor = Color.fromARGB(255, 59, 75, 145);
+const kSecondaryColor = Color.fromARGB(255, 13, 13, 92);
+const kPrimaryColor = Color.fromARGB(255, 9, 150, 32);
 const kPrimaryLightColor = Color(0xFFF1E6FF);
 const greyColor = Colors.grey;
 
@@ -14,4 +14,6 @@ class AssetFiles {
   static String CoffeenetLogo2 = "assets/logo.png";
   static String NoRecentlyScannedSvg = "assets/icons/scanned_empty.svg";
   static String NoBookmarksSvg = "assets/icons/bookmark_empty_better.svg";
+  static String platformX = "assets/icons/platform_x.svg";
+  static String platformX_black = "assets/icons/platform_x_black.svg";
 }
