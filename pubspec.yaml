@@ -53,10 +53,31 @@ dependencies:
   file_picker: ^8.1.2
   flutter_sound: ^9.12.44
   permission_handler: ^11.3.1
+  just_audio: ^0.9.40
+  path_provider: ^2.1.4
+  flutter_sound_platform_interface: ^9.12.44
+  mic_stream: ^0.7.1+2
+  audio_waveforms: ^1.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+    
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/platform_x_black.png"
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/icons/platform_x_black.png"
+  android: true
+  ios: true
+  fullscreen: true
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
