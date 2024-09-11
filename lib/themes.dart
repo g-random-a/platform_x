@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-const kPrimaryColor = Color.fromARGB(255, 8, 81, 239);
+const kPrimaryColor = Color.fromARGB(255, 8, 168, 35);
 // const kSecondaryColor = Color(0xFFEFBC08);
 const kPrimaryLightColor = Color(0xFFF1E6FF);
 // const whiteColor = Color(0xFF121212);
 // // const whiteColor = Colors.white;
-const greyColor = Colors.grey;
+const greyColor = Color.fromARGB(255, 158, 158, 158);
 // const blackColor = Colors.white;
 // // const blackColor = Colors.black;
 // const detailPageTextColor = Color(0xFF2C2C2C);
